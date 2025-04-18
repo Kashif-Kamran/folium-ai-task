@@ -1,7 +1,9 @@
+import Dashboard from "./pages/dashboard/iindex";
+
 function App() {
   return (
     <div>
-      <h1>Hello world</h1>
+      <Dashboard />
     </div>
   );
 }
