@@ -1,5 +1,3 @@
-"use client";
-
 import { TrendingUp } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
@@ -17,17 +15,11 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { HistoricalData } from "@/types";
 
-const historicalData = [
-  { date: "Apr 1", close: 102 },
-  { date: "Apr 2", close: 148 },
-  { date: "Apr 3", close: 130 },
-  { date: "Apr 4", close: 60 },
-  { date: "Apr 5", close: 80 },
-  { date: "Apr 6", close: 177 },
-  { date: "Apr 7", close: 120 },
-  { date: "Apr 8", close: 162 },
-];
+interface HistoricalDataChartWidgetProps {
+  data: HistoricalData;
+}
 
 const chartConfig = {
   close: {
@@ -36,18 +28,22 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function HistoricalDataChartWidget() {
+export default function HistoricalDataChartWidget({
+  data,
+}: HistoricalDataChartWidgetProps) {
   return (
-    <Card className="w-full  mx-auto shadow-md rounded-2xl mt-8">
+    <Card className="w-full mx-auto shadow-md rounded-2xl mt-8">
       <CardHeader>
         <CardTitle>Historical Data Chart</CardTitle>
-        <CardDescription>Closing prices for the last 8 days</CardDescription>
+        <CardDescription>
+          Closing prices for the last {data.length} days
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="w-full h-[300px]">
           <AreaChart
             accessibilityLayer
-            data={historicalData}
+            data={data}
             margin={{ left: 12, right: 12 }}
           >
             <CartesianGrid vertical={false} />
@@ -78,7 +74,7 @@ export default function HistoricalDataChartWidget() {
               Trending up by 5.2% this week <TrendingUp className="h-4 w-4" />
             </div>
             <div className="flex items-center gap-2 leading-none text-muted-foreground">
-              Apr 1 - Apr 8, 2024
+              {data[0]?.date} - {data[data.length - 1]?.date}
             </div>
           </div>
         </div>

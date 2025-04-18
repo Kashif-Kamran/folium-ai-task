@@ -6,8 +6,6 @@ import { ThemeProvider } from "./providers/theme/theme.provider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider defaultTheme="dark">
-      <App />
-    </ThemeProvider>
+    <App />
   </StrictMode>
 );

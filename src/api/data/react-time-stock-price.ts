@@ -1,4 +1,6 @@
-export const ReactTimeStockPrice = {
+import { RealTimeStockPriceApiResponse } from "../api-types";
+
+export const RealTimeStockPriceMockResponse: RealTimeStockPriceApiResponse = {
   "Meta Data": {
     "1. Information":
       "Intraday (5min) open, high, low, close prices and volume",
@@ -8,6 +10,7 @@ export const ReactTimeStockPrice = {
     "5. Output Size": "Compact",
     "6. Time Zone": "US/Eastern",
   },
+
   "Time Series (5min)": {
     "2025-04-17 19:50:00": {
       "1. open": "238.9500",
