@@ -15,7 +15,7 @@ const rangeToDays: Record<TimeRange, number> = {
 
 function Dashboard() {
   const [selectedStock, setSelectedStock] = useState<StockSymbol>("AAPL");
-  const [timeRange, setTimeRange] = useState<TimeRange>("1W");
+  const [timeRange, setTimeRange] = useState<TimeRange>("1M");
 
   const {
     data: stockOverviewData,
