@@ -15,11 +15,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { HistoricalData } from "@/types";
+import { useAppSelector } from "@/providers/redux";
 
-interface HistoricalDataChartWidgetProps {
-  data: HistoricalData;
-}
+interface HistoricalDataChartWidgetProps {}
 
 const chartConfig = {
   close: {
@@ -28,9 +26,9 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function HistoricalDataChartWidget({
-  data,
-}: HistoricalDataChartWidgetProps) {
+export default function HistoricalDataChartWidget({}: HistoricalDataChartWidgetProps) {
+  const { data } = useAppSelector((state) => state.historicalData);
+
   return (
     <Card className="w-full mx-auto shadow-md rounded-2xl mt-8">
       <CardHeader>

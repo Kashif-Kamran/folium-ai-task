@@ -1,11 +1,14 @@
-"use client";
-
+import React from "react";
 import { useState } from "react";
-import StockOverviewWidget from "./components/stock-overview-widget";
-import HistoricalDataChartWidget from "./components/history-data-chart-widget";
 import { ActionBar } from "./components/action-bar";
 import { StockSymbol, TimeRange } from "@/types";
 import { useHistoricalData, useRealTimeStockOverview } from "@/hooks/api.hooks";
+const StockOverViewWidgetLazy = React.lazy(
+  () => import("./components/stock-overview-widget")
+);
+const HistoricalDataChartWidgetLazy = React.lazy(
+  () => import("./components/history-data-chart-widget")
+);
 
 const rangeToDays: Record<TimeRange, number> = {
   "1W": 7,
@@ -17,17 +20,12 @@ function Dashboard() {
   const [selectedStock, setSelectedStock] = useState<StockSymbol>("AAPL");
   const [timeRange, setTimeRange] = useState<TimeRange>("1M");
 
-  const {
-    data: stockOverviewData,
-    isLoading: isOverviewLoading,
-    refetch: refetchOverview,
-  } = useRealTimeStockOverview(selectedStock);
+  const { refetch: refetchOverview } = useRealTimeStockOverview(selectedStock);
 
-  const {
-    data: historicalData,
-    isLoading: isHistoricalLoading,
-    refetch: refetchHistorical,
-  } = useHistoricalData(selectedStock, rangeToDays[timeRange]);
+  const { refetch: refetchHistorical } = useHistoricalData(
+    selectedStock,
+    rangeToDays[timeRange]
+  );
 
   const handleRefresh = () => {
     refetchOverview();
@@ -43,14 +41,8 @@ function Dashboard() {
         onTimeRangeChange={setTimeRange}
         onRefresh={handleRefresh}
       />
-
-      {stockOverviewData && <StockOverviewWidget data={stockOverviewData} />}
-
-      {historicalData && <HistoricalDataChartWidget data={historicalData} />}
-
-      {(isOverviewLoading || isHistoricalLoading) && (
-        <p className="text-sm text-gray-400 mt-4">Loading data...</p>
-      )}
+      <StockOverViewWidgetLazy />
+      <HistoricalDataChartWidgetLazy />
     </div>
   );
 }
