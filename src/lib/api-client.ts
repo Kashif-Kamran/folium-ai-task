@@ -2,7 +2,7 @@ import { stringify } from "qs";
 
 const { API_KEY, BASE_URL } = {
   BASE_URL: "https://www.alphavantage.co",
-  API_KEY: "OFCCGX5ZN47MOI4",
+  API_KEY: "OFCCGX5ZN47MOI4S",
 };
 
 const commonHeaders = {
@@ -45,14 +45,10 @@ async function makeRequest<
   query?: TQuery,
   options?: Omit<RequestInit, "body">
 ): Promise<TRes> {
-  const finalQuery = { ...query, apiKey: API_KEY };
-  console.log("Final Query : ", finalQuery);
+  const finalQuery = { ...query, apikey: API_KEY };
   const url = getUrl(path, finalQuery);
-  console.log("Url  ;", url);
   const requestOptions = getOptions(options, payload);
-
   const response = await fetch(url, requestOptions);
-
   if (!response.ok) {
     const errorData = await response.json();
     // Temp: Add a better error type

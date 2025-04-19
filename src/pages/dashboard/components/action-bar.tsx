@@ -30,7 +30,7 @@ export function ActionBar({
           <SelectValue placeholder="Select Stock" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="AAPL">AAPL</SelectItem>
+          <SelectItem value="IBM">IBM</SelectItem>
           <SelectItem value="MSFT">MSFT</SelectItem>
           <SelectItem value="GOOGL">GOOGL</SelectItem>
         </SelectContent>

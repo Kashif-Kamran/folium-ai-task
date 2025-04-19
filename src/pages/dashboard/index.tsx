@@ -17,7 +17,7 @@ const rangeToDays: Record<TimeRange, number> = {
 };
 
 function Dashboard() {
-  const [selectedStock, setSelectedStock] = useState<StockSymbol>("AAPL");
+  const [selectedStock, setSelectedStock] = useState<StockSymbol>("IBM");
   const [timeRange, setTimeRange] = useState<TimeRange>("1M");
 
   const { refetch: refetchOverview } = useRealTimeStockOverview(selectedStock);

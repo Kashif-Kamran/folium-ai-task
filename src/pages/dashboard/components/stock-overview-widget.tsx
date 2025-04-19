@@ -15,7 +15,7 @@ export default function StockOverviewWidget({}: StockOverviewWidgetProps) {
   }
 
   return (
-    <Card className="w-full  shadow-md rounded-2xl">
+    <Card className="w-full shadow-md rounded-2xl">
       <CardContent>
         <h2 className="text-xl font-semibold mb-4">Stock Overview</h2>
         <div className="text-3xl font-bold mb-2">

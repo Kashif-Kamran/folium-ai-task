@@ -3,7 +3,7 @@
 /**
  * Available stock symbols for selection
  */
-export type StockSymbol = "AAPL" | "MSFT" | "GOOGL";
+export type StockSymbol = "IBM" | "MSFT" | "GOOGL";
 
 /**
  * Available time ranges for historical data
