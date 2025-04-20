@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-query";
 import { updateStockData } from "@/providers/redux";
 import { useEffect } from "react";
+import { toast } from "sonner";
 
 export function useRealTimeStockOverview(
   symbol: StockSymbol,
@@ -34,6 +35,11 @@ export function useRealTimeStockOverview(
     }
   }, [query.data, dispatch]);
 
+  useEffect(() => {
+    if (query.isError && query.error) {
+      toast.error(`${query.error}`);
+    }
+  }, [query.error, query.isError]);
   return query;
 }
 
@@ -56,6 +62,12 @@ export function useHistoricalData(
       dispatch(updateHistoricalData(query.data));
     }
   }, [query.data, dispatch]);
+
+  useEffect(() => {
+    if (query.isError && query.error) {
+      toast.error(`${query.error.message}`);
+    }
+  }, [query.error, query.isError]);
 
   return query;
 }

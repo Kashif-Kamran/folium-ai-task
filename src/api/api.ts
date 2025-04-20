@@ -8,7 +8,7 @@ import {
   RealTimeStockPriceApiResponse,
 } from "./api-types";
 
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+// const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export async function fetchRealTimeStockOverview(
   symbol: StockSymbol
@@ -18,7 +18,9 @@ export async function fetchRealTimeStockOverview(
     symbol,
     interval: "5min",
   }).then((output: any) => (output["Error Message"] ? null : output));
-  console.log("Response : ", response);
+
+  if (response["Error Message"]) throw new Error(response["Error Message"]);
+  if (response["Information"]) throw new Error(response["Information"]);
   const json =
     (response as RealTimeStockPriceApiResponse) ??
     RealTimeStockPriceMockResponse;
@@ -34,7 +36,9 @@ export async function fetchHistoricalData(
     symbol,
     outputsize: "compact",
   }).then((output: any) => (output["Error Message"] ? null : output));
-  console.log("Response : ", response);
+
+  if (response["Error Message"]) throw new Error(response["Error Message"]);
+  if (response["Information"]) throw new Error(response["Information"]);
   const json =
     (response as HistoricalDataApiResponse) ?? HistoricalDataMockReponse;
   return mapHistoricalResponse(json, days);

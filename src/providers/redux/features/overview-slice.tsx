@@ -2,9 +2,15 @@ import { StockOverviewData } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: {
-  data: StockOverviewData | null;
+  data: StockOverviewData;
 } = {
-  data: null,
+  data: {
+    currentPrice: 0,
+    high: 0,
+    low: 0,
+    open: 0,
+    symbol: "IBM",
+  },
 };
 
 const { reducer: stockOverViewReducer, actions } = createSlice({
@@ -15,7 +21,7 @@ const { reducer: stockOverViewReducer, actions } = createSlice({
       state,
       action: PayloadAction<StockOverviewData | null>
     ) => {
-      state.data = action.payload;
+      if (action.payload) state.data = action.payload;
     },
   },
 });
